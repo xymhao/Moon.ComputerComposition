@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.Moon.ComputerComposition.iml
+# Datasource local storage ignored files
+/../../../../../../:\Console\Moon.ComputerComposition\.idea\.idea.Moon.ComputerComposition\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
