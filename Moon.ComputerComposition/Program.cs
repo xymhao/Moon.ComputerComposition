@@ -1,26 +1,64 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace Moon.ComputerComposition
+namespace Moon.ComputerComposition2
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static int i = 0;
+        private static bool getLock;
+
+        public static void Main2()
         {
-            int i = 0;
-            Interlocked.Add(ref i, 1);
-            
-            ThreadPool.QueueUserWorkItem(state =>
+            var list = new List<int>() {123};
+            SpinLock spinLock = new SpinLock();
+            for (int j = 0; j < 10; j++)
             {
-                Console.WriteLine("123");
+                int j1 = j;
 
-            });
-        }
+                Task Function()
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            Console.WriteLine($"线程{j1}： i= {i}");
+                            spinLock.Enter(ref getLock);
+                            Console.WriteLine($"线程{j1}： getLock= {getLock}");
+                        }
+                        finally
+                        {
+                            if (getLock)
+                            {
+                                spinLock.Exit();
+                            }
+                        }
+                    }
+                }
 
-        public void Write()
-        {
-            Console.WriteLine("123");
+                Task.Run(Function);
+            }
+
+            while (true)
+            {
+                var result  = Interlocked.Add(ref i, i++);
+                Thread.Sleep(2000);
+            }
+            
+            // Console.WriteLine(i);
+            // Console.WriteLine(result);
+            // //Interlocked.CompareExchange();
+            // //ReaderWriterLock
+            //
+            // ThreadPool.QueueUserWorkItem(state =>
+            // {
+            //     Console.WriteLine("123");
+            //
+            // });
+
+            Console.ReadLine();
         }
     }
 }
