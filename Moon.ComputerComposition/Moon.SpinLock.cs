@@ -13,22 +13,22 @@ namespace Moon.ComputerComposition2
         //      Default SpinLock construction ()
         //      SpinLock.Enter(ref bool)
         //      SpinLock.Exit()
-        static void Main()
+        private static void main()
         {
             ISyncPolicy policy = Policy.Handle<Exception>(exception => exception.Message == "").Retry(1000);
 
-            
-            SpinLock sl = new SpinLock();
 
-            StringBuilder sb = new StringBuilder();
+            var sl = new SpinLock();
+
+            var sb = new StringBuilder();
 
             // Action taken by each parallel job.
             // Append to the StringBuilder 10000 times, protecting
             // access to sb with a SpinLock.
             Action action = () =>
             {
-                bool gotLock = false;
-                for (int i = 0; i < 10000; i++)
+                var gotLock = false;
+                for (var i = 0; i < 10000; i++)
                 {
                     gotLock = false;
                     try
@@ -50,7 +50,7 @@ namespace Moon.ComputerComposition2
             // Check/Show the results
             Console.WriteLine("sb.Length = {0} (should be 30000)", sb.Length);
             Console.WriteLine("number of occurrences of '5' in sb: {0} (should be 3000)",
-                sb.ToString().Where(c => (c == '5')).Count());
+                sb.ToString().Where(c => c == '5').Count());
 
             Console.ReadLine();
         }

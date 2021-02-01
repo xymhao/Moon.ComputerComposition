@@ -7,21 +7,20 @@ namespace Moon.ComputerComposition2
 {
     internal class Program
     {
-        private static int i = 0;
+        private static int i;
         private static bool getLock;
 
         public static void Main2()
         {
-            var list = new List<int>() {123};
-            SpinLock spinLock = new SpinLock();
-            for (int j = 0; j < 10; j++)
+            var list = new List<int> {123};
+            var spinLock = new SpinLock();
+            for (var j = 0; j < 10; j++)
             {
                 int j1 = j;
 
                 Task Function()
                 {
                     while (true)
-                    {
                         try
                         {
                             Console.WriteLine($"线程{j1}： i= {i}");
@@ -30,12 +29,8 @@ namespace Moon.ComputerComposition2
                         }
                         finally
                         {
-                            if (getLock)
-                            {
-                                spinLock.Exit();
-                            }
+                            if (getLock) spinLock.Exit();
                         }
-                    }
                 }
 
                 Task.Run(Function);
@@ -43,10 +38,10 @@ namespace Moon.ComputerComposition2
 
             while (true)
             {
-                var result  = Interlocked.Add(ref i, i++);
+                int result = Interlocked.Add(ref i, i++);
                 Thread.Sleep(2000);
             }
-            
+
             // Console.WriteLine(i);
             // Console.WriteLine(result);
             // //Interlocked.CompareExchange();
