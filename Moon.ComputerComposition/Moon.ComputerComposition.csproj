@@ -43,6 +43,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Cache.cs" />
+        <Compile Include="EnvironmentTests.cs" />
         <Compile Include="FloatPrecision.cs" />
         <Compile Include="Moon.SpinLock.cs" />
         <Compile Include="Program.cs" />
