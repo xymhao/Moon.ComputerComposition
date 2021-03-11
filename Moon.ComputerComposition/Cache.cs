@@ -18,13 +18,13 @@ namespace Moon.ComputerComposition2
             var watch1 = new Stopwatch();
             var watch2 = new Stopwatch();
             watch1.Start();
-            // 循环1 413ms
+            // 循环1 92ms
             for (var i = 0; i < arr.Length; i++) arr[i] *= 3;
             watch1.Stop();
             Console.WriteLine(watch1.ElapsedMilliseconds);
 
             watch2.Start();
-            // 循环2 126ms
+            // 循环2 62ms
             for (var i = 0; i < arr2.Length; i += 8) arr2[i] *= 3;
             watch2.Stop();
 

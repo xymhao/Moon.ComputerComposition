@@ -31,7 +31,7 @@ namespace Moon.ComputerComposition2
         }
 
         /// <summary>
-        ///     sum is 1.6777216E7
+        /// sum is 1.6777216E7
         /// </summary>
         public static void Sum()
         {
